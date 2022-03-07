@@ -7,12 +7,13 @@ public class SpawnerController : MonoBehaviour
     private float timeForSpawn = 1.5F;
     private float timeForSpawnCheck = 1.5F;
 
-    private MapController _mapController;
+    private IMapService _mapService;
+    private MapData _map;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void Configuration(IMapService mapService, MapData map)
     {
-        _mapController = FindObjectOfType<MapController>();
+        _mapService = mapService;
+        _map = map;
     }
 
     // Update is called once per frame
@@ -21,7 +22,7 @@ public class SpawnerController : MonoBehaviour
         timeForSpawnCheck += Time.deltaTime;
         if (timeForSpawnCheck > timeForSpawn)
         {
-            ObjectPool.Instance.Spawn("enemy", _mapController.GetInitialEnemyPoint() + Vector3.up, Quaternion.Euler(0, 90, 0));
+            ObjectPool.Instance.Spawn("enemy", _mapService.GetInitialEnemyPoint(_map.CellsData) + Vector3.up, Quaternion.Euler(0, 90, 0));
             timeForSpawnCheck = 0;
         }
     }

@@ -42,7 +42,7 @@ public class ObjectPool
             for (int i = 0; i < _pool.Size; i++)
             {
                 var obj = InstanciatePoolObject(_pool);
-                obj.name += $" - {_pool.Tag}";
+                obj.name += $" - {_pool.Tag}_{i.ToString().PadLeft(5, '0')}";
                 _inactivedObject[_pool.Tag].Add(obj);
             }
         }

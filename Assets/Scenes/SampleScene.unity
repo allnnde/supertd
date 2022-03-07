@@ -153,6 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyModel: {fileID: 5580582150594571341, guid: dc816a060b4c3d64fa09ff4f4196ef2f, type: 3}
+  _cellGroundModel: {fileID: 5362561393248624616, guid: 4b05987f6f01a204c92ccf9ddc745d17, type: 3}
+  _cellStraightModel: {fileID: 3523347170495585398, guid: d98142d00a811cc4099a9f90603775ef, type: 3}
+  _cellCastleModel: {fileID: 4875989441898038333, guid: 6cf727ba6887d5244b4445fdefb3a95c, type: 3}
+  _xSize: 25
+  _ySize: 25
 --- !u!4 &430029380
 Transform:
   m_ObjectHideFlags: 0
@@ -372,10 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963acd04043927d4d9f69a9ff5dc25ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xSize: 10
-  _ySize: 10
-  _cellModel: {fileID: 5362561393248624616, guid: 4b05987f6f01a204c92ccf9ddc745d17, type: 3}
-  _cellStraightModel: {fileID: 5011526575110462296, guid: fd4d2a1326e06374daf5b9e3bba66b8d, type: 3}
 --- !u!4 &2132886504
 Transform:
   m_ObjectHideFlags: 0

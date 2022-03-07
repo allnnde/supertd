@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -6,54 +7,36 @@ using UnityEngine.AI;
 
 public class MapController : MonoBehaviour
 {
-    [SerializeField] private int _xSize;
-    [SerializeField] private int _ySize;
-    [SerializeField] private GameObject _cellModel;
-    [SerializeField] private GameObject _cellStraightModel;
     private GameObject[,] _map;
-    private Transform _initialEnemyCell;
     public Dictionary<CellType, GameObject> _cellTypeObj;
+    private MapData _mapData;
 
-    private Transform _finaleEnemyCell;
-
-    private void Awake()
+    public void Configuration(MapData map, Dictionary<CellType, GameObject> cellTypeObj)
     {
-        _cellTypeObj = new Dictionary<CellType, GameObject>();
-        _cellTypeObj.Add(CellType.Street, _cellStraightModel);
-        _cellTypeObj.Add(CellType.Ground, _cellModel);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        _mapData = map;
+        _cellTypeObj = cellTypeObj;
+        //README: se inicializan aca ya que necesitamos el spawer creado para el gameinit
+        //TODO ver si se puede mejorar, capaz eventos en la inializacion
         GenerateMap();
-
         ReBakeNavMesh();
     }
 
     private void GenerateMap()
     {
-        var MapService = new MapService();
-        var mapData = MapService.GenerateMapData(_xSize, _ySize);
-        _map = new GameObject[_xSize, _ySize];
-
-        for (int i = 0; i < mapData.GetLength(0); i++)
+        _map = new GameObject[_mapData.XSize, _mapData.YSize];
+        for (int i = 0; i < _mapData.CellsData.GetLength(0); i++)
         {
             GameObject cell;
-            for (int j = 0; j < mapData.GetLength(1); j++)
+            for (int j = 0; j < _mapData.CellsData.GetLength(1); j++)
             {
-                var cellData = mapData[i, j];
+                var cellData = _mapData.CellsData[i, j];
+                var model = _cellTypeObj[cellData.CellType];
 
-                cell = Instantiate(_cellTypeObj[cellData.CellType], cellData.Position, _cellStraightModel.transform.rotation);
+                cell = Instantiate(model, cellData.Position, model.transform.rotation);
 
                 if (cellData.IsInitialPath)
                 {
-                    _initialEnemyCell = cell.transform;
                     cell.AddComponent<SpawnerController>();
-                }
-                if (cellData.IsFinalyPath)
-                {
-                    _finaleEnemyCell = cell.transform;
                 }
 
                 cell.name = cellData.Name;
@@ -74,15 +57,5 @@ public class MapController : MonoBehaviour
                 mesh?.BuildNavMesh();
             }
         }
-    }
-
-    public Vector3 GetFinaliEnemyPoint()
-    {
-        return _finaleEnemyCell.position;
-    }
-
-    public Vector3 GetInitialEnemyPoint()
-    {
-        return _initialEnemyCell.position;
     }
 }

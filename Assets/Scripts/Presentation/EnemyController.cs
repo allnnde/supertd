@@ -7,14 +7,21 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour, IPoolable
 {
     private NavMeshAgent _meshAgent;
-    private MapController _mapController;
-
     GameObject IPoolable.Owner => gameObject;
+    private IMapService _mapService;
+    private MapData _map;
+
+    public float Damage = 10;
+
+    public void Configuration(IMapService mapService, MapData map)
+    {
+        _mapService = mapService;
+        _map = map;
+    }
 
     private void Awake()
     {
         _meshAgent = GetComponent<NavMeshAgent>();
-        _mapController = FindObjectOfType<MapController>();
     }
 
     void IPoolable.OnDespawn()
@@ -33,15 +40,6 @@ public class EnemyController : MonoBehaviour, IPoolable
         transform.position = position;
         transform.rotation = rotation;
         gameObject.SetActive(true);
-        _meshAgent.SetDestination(_mapController.GetFinaliEnemyPoint());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_meshAgent.remainingDistance < .01F)
-        {
-            ObjectPool.Instance.Despawn("enemy", gameObject);
-        }
+        _meshAgent.SetDestination(_mapService.GetFinaliEnemyPoint(_map.CellsData));
     }
 }

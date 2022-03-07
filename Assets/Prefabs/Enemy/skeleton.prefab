@@ -417,9 +417,10 @@ GameObject:
   - component: {fileID: 6418583335823910783}
   - component: {fileID: 4466046887890609867}
   - component: {fileID: 5580582150594571341}
+  - component: {fileID: 6735262366816202881}
   m_Layer: 0
   m_Name: skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,6 +479,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be953b12173213e4db0f2044a549199c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 10
+--- !u!136 &6735262366816202881
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5933689484711755205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 0.85
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &7171831848779574102
 GameObject:
   m_ObjectHideFlags: 0
