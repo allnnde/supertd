@@ -10,7 +10,6 @@ public class MapService : IMapService
         var map = new MapData(xSize, ySize);
 
         var _mapData = new CellData[xSize, ySize];
-        var middleCell = _mapData.GetLength(1) / 2;
         for (int i = 0; i < _mapData.GetLength(0); i++)
         {
             for (int j = 0; j < _mapData.GetLength(1); j++)
@@ -31,7 +30,7 @@ public class MapService : IMapService
         {
             try
             {
-                var action = (PathBuildDesicionEnum)Random.Range(-1, 2); //TODO: mover a enumeracion
+                var action = (PathBuildDesicionEnum)Random.Range(-1, 2);
                 var previousPosition = new Vector3Int(position.x, position.y, position.z);
                 switch (action)
                 {
