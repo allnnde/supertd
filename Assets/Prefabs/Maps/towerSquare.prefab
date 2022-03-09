@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5306482818322963085}
   - component: {fileID: 7824510099884652726}
   - component: {fileID: 4542492019946215410}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 643653635626810938}
   - component: {fileID: 1285869065753636264}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127999141447947845}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2614767601629087849}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,9 +275,9 @@ GameObject:
   - component: {fileID: -51523262583001679}
   - component: {fileID: 8766157523800375333}
   - component: {fileID: 8255048178321412534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: towerSquare
-  m_TagString: Untagged
+  m_TagString: tile_castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,9 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808992595d136ec4a802d248f40f42e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifeMax: 1000
+  LifeMax: 500
   _slider: {fileID: 1285869065753636264}
-  canvasTransform: {fileID: 0}
 --- !u!1 &5100290708157932780
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +402,7 @@ GameObject:
   - component: {fileID: 3848725737868760386}
   - component: {fileID: 3735436338421883101}
   - component: {fileID: 9111608173014404562}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +477,7 @@ GameObject:
   - component: {fileID: 1922209815762973642}
   - component: {fileID: 6179664941009202713}
   - component: {fileID: 3849180663841468527}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

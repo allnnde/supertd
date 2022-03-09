@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MuralHealthController : StructureHealthController, IPoolable
+{
+    GameObject IPoolable.Owner => gameObject;
+
+    public override void Death()
+    {
+        ObjectPool.Instance.Despawn(ObjectPoolTags.OBJECT_POOL_STRUCTURE_MURAL, gameObject);
+    }
+
+    void IPoolable.OnDespawn()
+    {
+        gameObject.SetActive(false);
+    }
+
+    void IPoolable.OnInstanciate(Transform parent)
+    {
+        if (_healthServices == null)
+        {
+            _healthServices = new HealthServices(this);
+        }
+        transform.parent = parent;
+        gameObject.SetActive(false);
+    }
+
+    void IPoolable.OnSpawn(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+        gameObject.SetActive(true);
+    }
+}

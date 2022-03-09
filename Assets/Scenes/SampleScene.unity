@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430029380}
   - component: {fileID: 430029378}
+  - component: {fileID: 430029379}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -158,6 +159,22 @@ MonoBehaviour:
   _cellCastleModel: {fileID: 4875989441898038333, guid: 6cf727ba6887d5244b4445fdefb3a95c, type: 3}
   _xSize: 25
   _ySize: 25
+--- !u!114 &430029379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430029377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e878e6883ad7647a36ea287791e17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballestaTower: {fileID: 2676588475663531156, guid: 182dec0202e977c4f98d45cc9c670d52, type: 3}
+  mapMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &430029380
 Transform:
   m_ObjectHideFlags: 0

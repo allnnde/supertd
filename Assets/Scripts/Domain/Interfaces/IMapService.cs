@@ -4,7 +4,7 @@ public interface IMapService
 {
     MapData GenerateMapData(int xSize, int ySize);
 
-    Vector3 GetFinaliEnemyPoint(CellData[,] map);
+    Vector3 GetFinaliEnemyPoint();
 
-    Vector3 GetInitialEnemyPoint(CellData[,] map);
+    Vector3 GetInitialEnemyPoint();
 }

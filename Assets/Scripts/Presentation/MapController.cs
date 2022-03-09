@@ -16,7 +16,6 @@ public class MapController : MonoBehaviour
         _mapData = map;
         _cellTypeObj = cellTypeObj;
         //README: se inicializan aca ya que necesitamos el spawer creado para el gameinit
-        //TODO ver si se puede mejorar, capaz eventos en la inializacion
         GenerateMap();
         ReBakeNavMesh();
     }

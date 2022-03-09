@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class MapService : IMapService
 {
+    private MapData _map;
+
     public MapData GenerateMapData(int xSize, int ySize)
     {
-        var map = new MapData(xSize, ySize);
+        _map = new MapData(xSize, ySize);
 
         var _mapData = new CellData[xSize, ySize];
         for (int i = 0; i < _mapData.GetLength(0); i++)
@@ -79,17 +81,17 @@ public class MapService : IMapService
                 Debug.LogError(ex);
             }
         }
-        map.CellsData = _mapData;
-        return map;
+        _map.CellsData = _mapData;
+        return _map;
     }
 
-    public Vector3 GetFinaliEnemyPoint(CellData[,] map)
+    public Vector3 GetFinaliEnemyPoint()
     {
-        return map.Cast<CellData>().FirstOrDefault(p => p.IsFinalyPath).Position;
+        return _map.CellsData.Cast<CellData>().FirstOrDefault(p => p.IsFinalyPath).Position;
     }
 
-    public Vector3 GetInitialEnemyPoint(CellData[,] map)
+    public Vector3 GetInitialEnemyPoint()
     {
-        return map.Cast<CellData>().FirstOrDefault(p => p.IsInitialPath).Position;
+        return _map.CellsData.Cast<CellData>().FirstOrDefault(p => p.IsInitialPath).Position;
     }
 }
