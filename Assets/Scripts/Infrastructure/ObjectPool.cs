@@ -59,7 +59,6 @@ public class ObjectPool
     public GameObject Spawn(string tag, Vector3 position, Quaternion rotation)
     {
         var obj = _inactivedObject[tag].FirstOrDefault();
-        IPoolable poolable;
         if (obj == null)
         {
             var pool = Pools.FirstOrDefault(p => p.Tag.Equals(tag));
@@ -69,8 +68,7 @@ public class ObjectPool
         {
             _inactivedObject[tag].Remove(obj);
         }
-
-        poolable = obj.GetComponent<IPoolable>();
+        var poolable = obj.GetComponent<IPoolable>();
         poolable.OnSpawn(position, rotation);
 
         _activedObject[tag].Add(obj);
@@ -85,7 +83,6 @@ public class ObjectPool
         {
             return;
         }
-
         var pool = obj.GetComponent<IPoolable>();
         pool.OnDespawn();
 
