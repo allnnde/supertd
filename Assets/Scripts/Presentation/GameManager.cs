@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
         _buildLayer.Add(BuildTypeEnum.Mural, LayerNames.LAYER_MAP_STREET);
         _buildLayer.Add(BuildTypeEnum.Tower_Ballesta, LayerNames.LAYER_MAP_GROUND);
 
+        var _buildObjPool = new Dictionary<BuildTypeEnum, string>();
+        _buildObjPool.Add(BuildTypeEnum.Tower_Ballesta, ObjectPoolTags.OBJECT_POOL_TOWER_BALLESTA);
+        _buildObjPool.Add(BuildTypeEnum.Mural, ObjectPoolTags.OBJECT_POOL_STRUCTURE_MURAL);
+
         ObjectPool.Instance.Pools.Add(new Pool() { Item = _enemyModel, Parent = transform, Size = 50, Tag = ObjectPoolTags.OBJECT_POOL_SKELETON_ENEMY });
         ObjectPool.Instance.Pools.Add(new Pool() { Item = _towerModel, Parent = transform, Size = 20, Tag = ObjectPoolTags.OBJECT_POOL_TOWER_BALLESTA });
         ObjectPool.Instance.Pools.Add(new Pool() { Item = _muralModel, Parent = transform, Size = 20, Tag = ObjectPoolTags.OBJECT_POOL_STRUCTURE_MURAL });
@@ -61,7 +65,14 @@ public class GameManager : MonoBehaviour
         var builderController = FindObjectsOfType<BuilderController>(true);
         foreach (var item in builderController)
         {
-            item.Configuration(_buildLayer);
+            item.Configuration(_buildLayer, _buildObjPool);
+        }
+
+        var cameraController = FindObjectsOfType<CameraController>(true);
+        foreach (var item in cameraController)
+        {
+            var cameraSevices = new CameraService(item);
+            item.Configuration(cameraSevices);
         }
     }
 }

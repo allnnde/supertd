@@ -6,10 +6,12 @@ public class BuilderController : MonoBehaviour
 {
     private BuildTypeEnum buildType;
     private Dictionary<BuildTypeEnum, string> _buildLayer;
+    private Dictionary<BuildTypeEnum, string> _buildObjTag;
 
-    public void Configuration(Dictionary<BuildTypeEnum, string> buildLayer)
+    public void Configuration(Dictionary<BuildTypeEnum, string> buildLayer, Dictionary<BuildTypeEnum, string> buildObjTag)
     {
         _buildLayer = buildLayer;
+        _buildObjTag = buildObjTag;
     }
 
     // Update is called once per frame
@@ -24,19 +26,7 @@ public class BuilderController : MonoBehaviour
             var mapMask = LayerMask.GetMask(_buildLayer[buildType]);
             if (Physics.Raycast(inputRay, out hit, 1000, mapMask))
             {
-                switch (buildType)
-                {
-                    case BuildTypeEnum.Tower_Ballesta:
-                        ObjectPool.Instance.Spawn(ObjectPoolTags.OBJECT_POOL_TOWER_BALLESTA, hit.transform.position, hit.transform.rotation);
-                        break;
-
-                    case BuildTypeEnum.Mural:
-                        ObjectPool.Instance.Spawn(ObjectPoolTags.OBJECT_POOL_STRUCTURE_MURAL, hit.transform.position, hit.transform.rotation);
-                        break;
-
-                    default:
-                        break;
-                }
+                ObjectPool.Instance.Spawn(_buildObjTag[buildType], hit.transform.position, hit.transform.rotation);
                 buildType = BuildTypeEnum.None;
             }
         }

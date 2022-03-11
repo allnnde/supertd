@@ -10,6 +10,7 @@ public abstract class HealthController : MonoBehaviour, IHealthController
     protected Slider _slider;
 
     protected IHealthServices _healthServices;
+    private Canvas _healthCanvas;
 
     public void Configuration(IHealthServices healthServices)
     {
@@ -19,7 +20,19 @@ public abstract class HealthController : MonoBehaviour, IHealthController
     private void Awake()
     {
         _lifeActual = LifeMax;
-        _slider.GetComponentInParent<Canvas>().worldCamera = Camera.main;
+        _healthCanvas = _slider.GetComponentInParent<Canvas>();
+        _healthCanvas.worldCamera = Camera.main;
+        RotateHealthBarToCamera();
+    }
+
+    private void RotateHealthBarToCamera()
+    {
+        _healthCanvas.transform.rotation = Camera.main.transform.rotation;
+    }
+
+    private void Update()
+    {
+        RotateHealthBarToCamera();
     }
 
     public abstract void Death();
