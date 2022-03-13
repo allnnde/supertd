@@ -14,12 +14,14 @@ public class CameraService : ICameraService
         _cameraController = cameraController;
     }
 
+    //TODO ver de comvertir los parametros en una clase
     public void MoveCamera(float x, float y, float speed, float time)
     {
         var position = new Vector3(x, y, 0) * speed * time;
         _cameraController.MoveCamera(position);
     }
 
+    //TODO ver de comvertir los parametros en una clase
     public float ZoomCamera(float mouseScrollDeltaY,
                            float targetZoom,
                            float sensitivity,

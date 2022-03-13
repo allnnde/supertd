@@ -14,11 +14,7 @@ public class MapService : IMapService
         {
             for (int j = 0; j < _mapData.GetLength(1); j++)
             {
-                CellData cell = new CellData();
-                cell.CellType = CellType.Ground;
-                cell.Name = $"cell-{i}-{j}";
-                cell.Position = new Vector3(i, 0, j);
-                _mapData[i, j] = cell;
+                _mapData[i, j] = new CellData(CellType.Ground, new Vector3(i, 0, j), $"cell-{i}-{j}");
             }
         }
 

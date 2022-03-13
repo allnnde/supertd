@@ -6,13 +6,19 @@ public class TowerController : MonoBehaviour, IPoolable
     private float timeShoot = 1F;
     private float timeShootCheck = 1F;
     public float Damage = 30;
+    private ITowerService _towerService;
+
+    public void Configuration(ITowerService towerService)
+    {
+        _towerService = towerService;
+    }
 
     GameObject IPoolable.Owner => gameObject;
 
     // Start is called before the first frame update
     private void Update()
     {
-        if (_target && !_target.gameObject.activeSelf)
+        if (_towerService.IsTargetActive(_target))
         {
             _target = null;
         }
@@ -26,19 +32,21 @@ public class TowerController : MonoBehaviour, IPoolable
             }
             timeShootCheck = 0;
         }
+        if (_target)
+            transform.LookAt(_target.transform);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(Tags.TAG_ENEMY) && !_target)
+        if (_towerService.VerifyTargetInRange(other, _target))
         {
-            _target = other.gameObject.GetComponent<EnemyHealthController>();
+            _target = other.GetComponent<EnemyHealthController>();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(Tags.TAG_ENEMY) && other.name.Equals(_target?.name))
+        if (_towerService.VerifyTargetOutRange(other, _target))
         {
             _target = null;
         }
@@ -46,6 +54,7 @@ public class TowerController : MonoBehaviour, IPoolable
 
     void IPoolable.OnInstanciate(Transform parent)
     {
+        Configuration(new TowerService());
         transform.parent = parent;
         gameObject.SetActive(false);
     }

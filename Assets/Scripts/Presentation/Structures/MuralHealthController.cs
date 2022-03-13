@@ -16,10 +16,8 @@ public class MuralHealthController : StructureHealthController, IPoolable
 
     void IPoolable.OnInstanciate(Transform parent)
     {
-        if (_healthServices == null)
-        {
-            _healthServices = new HealthServices(this);
-        }
+        //TODO ver de mejorar esta injeccion, exponiendo datos en gameManager
+        Configuration(new HealthServices(this), new EconomyService(FindObjectOfType<EcomonyController>()));
         transform.parent = parent;
         gameObject.SetActive(false);
     }

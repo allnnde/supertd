@@ -10,11 +10,13 @@ public abstract class HealthController : MonoBehaviour, IHealthController
     protected Slider _slider;
 
     protected IHealthServices _healthServices;
+    protected IEcomonyService _ecomonyService;
     private Canvas _healthCanvas;
 
-    public void Configuration(IHealthServices healthServices)
+    public void Configuration(IHealthServices healthServices, IEcomonyService ecomonyController)
     {
         _healthServices = healthServices;
+        _ecomonyService = ecomonyController;
     }
 
     private void Awake()
